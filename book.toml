@@ -1,0 +1,6 @@
+[book]
+authors = ["voidash"]
+language = "en"
+multilingual = false
+src = "src"
+title = "KUOSC Rust Workshop"
