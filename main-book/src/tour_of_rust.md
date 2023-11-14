@@ -475,3 +475,4 @@ futures = "0.3" // name = version
 * **Caret version requirements**: `"^1.2.3"` (default, compatible with public API version 1.2.3)
 * **Tilde version requirements**: `"~1.2.3"` (version 1.2.3 and the versions up to 1.3.0, not including 1.3.0)
 * **Wildcard version requirements**: `"1.2.*"` (any version that starts with 1.2)
+

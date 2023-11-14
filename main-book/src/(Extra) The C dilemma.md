@@ -73,4 +73,5 @@ try copying and running it online on [online GDB](https://www.onlinegdb.com/onli
 1. Heap-allocated memory is freed via the `Drop` trait when the corresponding `Box` leaves the scope.
 1. Out-of-bounds accesses cause a panic or can be checked via the `get` method of a slice.
 1. `match` mandates that all cases are handled.
-1. Fallible Rust functions return `Result` values that need to be unwrapped and thereby checked for success. Additionally, the compiler emits a warning if you miss to check the return value of a function marked with `#[must_use]`.
+1. Fallible Rust functions return `Result` values that need to be unwrapped and thereby checked for success. Additionally, the compiler emits a warning if you miss to check the return value of a function marked with `#[must_use]`
+
