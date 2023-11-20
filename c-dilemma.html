@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Comparing with C - KUOSC Rust Workshop</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="why_rust.html"><strong aria-hidden="true">2.</strong> Why Rust?</a></li><li class="chapter-item expanded "><a href="Installing_Rust.html"><strong aria-hidden="true">3.</strong> Installing Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setting_up.html"><strong aria-hidden="true">3.1.</strong> Setting Up Editors and Extensions</a></li><li class="chapter-item expanded "><a href="hello_world.html"><strong aria-hidden="true">3.2.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="dissect-hello-world.html"><strong aria-hidden="true">3.3.</strong> Understanding Hello world</a></li></ol></li><li class="chapter-item expanded "><a href="c-dilemma.html" class="active"><strong aria-hidden="true">4.</strong> Comparing with C</a></li><li class="chapter-item expanded "><a href="tour_of_rust.html"><strong aria-hidden="true">5.</strong> Tour of Rust</a></li><li class="chapter-item expanded "><a href="stack-vs-heap.html"><strong aria-hidden="true">6.</strong> Stack vs Heap</a></li><li class="chapter-item expanded "><a href="ownership-and-borrow-check.html"><strong aria-hidden="true">7.</strong> Ownership and Borrow Checker</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Work in Progress</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUOSC Rust Workshop</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Extracted from : https://google.github.io/comprehensive-rust/why-rust/an-example-in-c.html</p>
+<p>Here is the C code with many bugs. Try finding it</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/stat.h&gt;
+
+int main(int argc, char* argv[]) {
+	char *buf, *filename;
+	FILE *fp;
+	size_t bytes, len;
+	struct stat st;
+
+	switch (argc) {
+		case 1:
+			printf(&quot;Too few arguments!\n&quot;);
+			return 1;
+
+		case 2:
+			filename = argv[argc];
+			stat(filename, &amp;st);
+			len = st.st_size;
+			
+			buf = (char*)malloc(len);
+			if (!buf)
+				printf(&quot;malloc failed!\n&quot;, len);
+				return 1;
+
+			fp = fopen(filename, &quot;rb&quot;);
+			bytes = fread(buf, 1, len, fp);
+			if (bytes = st.st_size)
+				printf(&quot;%s&quot;, buf);
+			else
+				printf(&quot;fread failed!\n&quot;);
+
+		case 3:
+			printf(&quot;Too many arguments!\n&quot;);
+			return 1;
+	}
+
+	return 0;
+}
+
+</code></pre>
+<p>Can you find all the bugs? There are 11 of them</p>
+<ol>
+<li>Assignment <code>=</code> instead of equality comparison <code>==</code> (line 28)</li>
+<li>Excess argument to <code>printf</code> (line 23)</li>
+<li>File descriptor leak (after line 26)</li>
+<li>Forgotten braces in multi-line <code>if</code> (line 22)</li>
+<li>Forgotten <code>break</code> in a <code>switch</code> statement (line 32)</li>
+<li>Forgotten NUL-termination of the <code>buf</code> string, leading to a buffer overflow (line 29)</li>
+<li>Memory leak by not freeing the <code>malloc</code>-allocated buffer (line 21)</li>
+<li>Out-of-bounds access (line 17)</li>
+<li>Unchecked cases in the <code>switch</code> statement (line 11)</li>
+<li>Unchecked return values of <code>stat</code> and <code>fopen</code> (lines 18 and 26)</li>
+</ol>
+<p>try copying and running it online on <a href="https://www.onlinegdb.com/online_c_compiler">online GDB</a>. It will compile fine. But these are all serious bugs, how come the compiler accepts just like that.... and these errors are serious</p>
+<ul>
+<li>Assignment <code>=</code> instead of equality comparison <code>==</code>: <a href="https://freedom-to-tinker.com/2013/10/09/the-linux-backdoor-attempt-of-2003">The Linux Backdoor Attempt of 2003</a></li>
+<li>Forgotten braces in multi-line <code>if</code>: <a href="https://dwheeler.com/essays/apple-goto-fail.html">The Apple goto fail vulnerability</a></li>
+<li>Forgotten <code>break</code> in a <code>switch</code> statement: <a href="https://www.lufsec.com/anatomy-of-a-security-hole-the-break-that-broke-sudo/">The break that broke sudo</a></li>
+</ul>
+<h3 id="how-can-rust-be-better-here"><a class="header" href="#how-can-rust-be-better-here">How can Rust be better here?</a></h3>
+<ol>
+<li>Assignments inside an <code>if</code> clause are not supported.</li>
+<li>Format strings are checked at compile-time.</li>
+<li>Resources are freed at the end of scope via the <code>Drop</code> trait.</li>
+<li>All <code>if</code> clauses require braces.</li>
+<li><code>match</code> (as the Rust equivalent to <code>switch</code>) does not fall-through, hence you can’t accidentally forget a <code>break</code>.</li>
+<li>Buffer slices carry their size and don’t rely on a NUL terminator.</li>
+<li>Heap-allocated memory is freed via the <code>Drop</code> trait when the corresponding <code>Box</code> leaves the scope.</li>
+<li>Out-of-bounds accesses cause a panic or can be checked via the <code>get</code> method of a slice.</li>
+<li><code>match</code> mandates that all cases are handled.</li>
+<li>Fallible Rust functions return <code>Result</code> values that need to be unwrapped and thereby checked for success. Additionally, the compiler emits a warning if you miss to check the return value of a function marked with <code>#[must_use]</code></li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="dissect-hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="tour_of_rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="dissect-hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="tour_of_rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
