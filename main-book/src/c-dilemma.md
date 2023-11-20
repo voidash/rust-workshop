@@ -1,4 +1,7 @@
+
 Extracted from : https://google.github.io/comprehensive-rust/why-rust/an-example-in-c.html
+
+Here is the C code with many bugs. Try finding it
 
 ````c
 #include <stdio.h>

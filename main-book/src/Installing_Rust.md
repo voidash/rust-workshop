@@ -1,6 +1,13 @@
-## Installing Rust on Windows
 
-### Step 1: Download and Run the Installer
+Click the guide depending on the operating system you use
+- [Installing on Windows](#windows)
+- [Installing on Linux and Mac](#linux)
+
+If you face any problem while installing, you can ask on discord, or google  
+
+## Installing Rust on Windows {#windows}
+
+### Step 1: Download and Run the Installer 
 
 1. Go to the official Rust website: [https://www.rust-lang.org/](https://www.rust-lang.org/).
 1. Click on the "Install" button.
@@ -18,7 +25,7 @@
 
 [Install Rust on Windows without Installing Visual C++ Build Tools](https://www.youtube.com/watch?v=92HoSWgsx-4)
 
-## Installing Rust on Linux and Mac OS
+## Installing Rust on Linux and Mac OS {#linux}
 
 ### Step 1: Install Rust via Rustup (Recommended)
 

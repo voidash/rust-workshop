@@ -14,7 +14,7 @@
 
 `cd hello_world`
 
-* Inside this directory, you'll find a file named `main.rs`. Open this file in a text editor of your choice.
+* Inside this directory, you'll find a file named `main.rs`. Open this file in a text editor of your choice. If you use vscode, then you can open the folder in vscode from terminal with `code .`  
 
 * Replace the existing code with the following Hello program:
 
